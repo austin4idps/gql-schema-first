@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { Member } from './entitiy/member.entity';
 import { MemberModule } from './member/member.module';
 
 @Module({
@@ -24,14 +25,15 @@ import { MemberModule } from './member/member.module';
       useFactory: (configService: ConfigService) => {
         return {
           type: 'postgres',
-          host:  configService.get('DB_HOST'),
+          host: configService.get('DB_HOST'),
           port: configService.get('DB_PORT') as number,
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_NAME'),
+          entities: [Member],
           synchronize: true,
-        }
-      }
+        };
+      },
     }),
     MemberModule,
   ],
