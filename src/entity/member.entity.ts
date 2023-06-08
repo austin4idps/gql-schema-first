@@ -1,4 +1,4 @@
-import { MemberTypeEnum } from 'src/enum/member-type.enum';
+import { MemberTypeEnum } from 'src/graphql/graphql';
 import {
   Column,
   Entity,
