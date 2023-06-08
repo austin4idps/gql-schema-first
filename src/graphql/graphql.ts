@@ -25,7 +25,7 @@ export class CreateUserInput {
   profile?: Nullable<ProfileInput>;
 }
 
-export class MemberPofile {
+export class MemberProfile {
   id: string;
   email?: Nullable<string>;
   firstName?: Nullable<string>;
@@ -36,7 +36,7 @@ export class Member {
   id: string;
   displayName?: Nullable<string>;
   memberType?: Nullable<MemberTypeEnum>;
-  profile?: Nullable<MemberPofile>;
+  profile?: Nullable<MemberProfile>;
 }
 
 export abstract class IQuery {

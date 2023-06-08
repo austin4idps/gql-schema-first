@@ -1,43 +1,43 @@
-type MemberPofile{
+type MemberProfile {
   id: ID!
   email: String
   firstName: String
   lastName: String
 }
 
-enum MemberTypeEnum{
+enum MemberTypeEnum {
   Admin
   User
   Vip
 }
 
-type Member{
+type Member {
   id: ID!
-  displayName:String
+  displayName: String
   memberType: MemberTypeEnum
-  profile: MemberPofile
+  profile: MemberProfile
 }
 
-type Query{
+type Query {
   getUser(id: ID!): Member
 }
 
-input ProfileInput{
+input ProfileInput {
   email: String
   firstName: String
-  lastName:String
+  lastName: String
 }
 
-input CreateUserInput{
+input CreateUserInput {
   displayName: String!
   memberType: MemberTypeEnum!
   profile: ProfileInput
 }
 
-type CreateUserRes{
+type CreateUserRes {
   memberId: String
 }
 
-type Mutation{
+type Mutation {
   createUser(input: CreateUserInput): CreateUserRes
 }
