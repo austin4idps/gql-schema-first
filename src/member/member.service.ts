@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Member } from 'src/entitiy/member.entity';
-import { Profile } from 'src/entitiy/profile.entity';
+import { Member } from 'src/entity/member.entity';
+import { Profile } from 'src/entity/profile.entity';
 import { CreateUserInput } from 'src/graphql/graphql';
 import { Repository } from 'typeorm';
 @Injectable()
