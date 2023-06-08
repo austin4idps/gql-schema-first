@@ -1,0 +1,43 @@
+type MemberPofile{
+  id: ID!
+  email: String
+  firstName: String
+  lastName: String
+}
+
+enum MemberTypeEnum{
+  Admin
+  User
+  Vip
+}
+
+type Member{
+  id: ID!
+  displayName:String
+  memberType: MemberTypeEnum
+  profile: MemberPofile
+}
+
+type Query{
+  getUser(id: ID!): Member
+}
+
+input ProfileInput{
+  email: String
+  firstName: String
+  lastName:String
+}
+
+input CreateUserInput{
+  displayName: String!
+  memberType: MemberTypeEnum!
+  profile: ProfileInput
+}
+
+type CreateUserRes{
+  memberId: String
+}
+
+type Mutation{
+  createUser(input: CreateUserInput): CreateUserRes
+}
