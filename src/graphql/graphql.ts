@@ -28,7 +28,6 @@ export class CreateUserInput {
 
 export class MemberPofile {
     id: string;
-    memberId: string;
     email?: Nullable<string>;
     firstName?: Nullable<string>;
     lastName?: Nullable<string>;
