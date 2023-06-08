@@ -14,28 +14,26 @@ export class MemberService {
   ) {}
 
   async getUser(id: string) {
-
     const existMember = await this.memberRepo
       .createQueryBuilder('m')
       .where('m.id = :id', { id })
       .leftJoinAndSelect('m.profile', 'mp')
       .getOne();
 
-      console.log(existMember)
+    console.log(existMember);
     return existMember;
   }
 
   async createUser(input: CreateUserInput) {
-    const newMember  = new Member();
-    newMember.displayName = input.displayName
-    newMember.memberType = input.memberType
+    const newMember = new Member();
+    newMember.displayName = input.displayName;
+    newMember.memberType = input.memberType;
 
-    const existProfile = await this.memberProfileRepo.save(input.profile)
-    
+    const existProfile = await this.memberProfileRepo.save(input.profile);
+
     newMember.profile = existProfile;
-    
-    const existUser = await this.memberRepo.save(newMember)
-    return {memberId: existUser.id  }
+
+    const existUser = await this.memberRepo.save(newMember);
+    return { memberId: existUser.id };
   }
 }
-

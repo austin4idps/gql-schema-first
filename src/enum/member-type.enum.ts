@@ -1,8 +1,8 @@
 import { registerEnumType } from '@nestjs/graphql';
 
-export enum MemberTypeEnum{
+export enum MemberTypeEnum {
   Admin = 'Admin',
-  User =  'User',
+  User = 'User',
   Vip = 'Vip',
 }
 
