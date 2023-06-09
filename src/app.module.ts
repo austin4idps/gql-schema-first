@@ -7,8 +7,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CategoryModule } from './category/category.module';
 import { MemberModule } from './member/member.module';
 import { PostModule } from './post/post.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { PostModule } from './post/post.module';
     }),
     MemberModule,
     PostModule,
+    ProductModule,
+    CategoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

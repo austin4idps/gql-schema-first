@@ -13,6 +13,10 @@ export enum MemberTypeEnum {
   Vip = 'Vip',
 }
 
+export class CreateCategoryInput {
+  name: string;
+}
+
 export class ProfileInput {
   email?: Nullable<string>;
   firstName?: Nullable<string>;
@@ -40,21 +44,20 @@ export class DeletePostInput {
   postId: string;
 }
 
-export class MemberProfile {
-  id: string;
-  email?: Nullable<string>;
-  firstName?: Nullable<string>;
-  lastName?: Nullable<string>;
+export class CreateProductInput {
+  name: string;
+  categoryIds?: Nullable<Nullable<string>[]>;
 }
 
-export class Member {
+export class Category {
   id: string;
-  displayName?: Nullable<string>;
-  memberType?: Nullable<MemberTypeEnum>;
-  profile?: Nullable<MemberProfile>;
+  name?: Nullable<string>;
+  products?: Nullable<Nullable<Product>[]>;
 }
 
 export abstract class IQuery {
+  abstract category(): Nullable<Category>[] | Promise<Nullable<Category>[]>;
+
   abstract getUser(id: string): Nullable<Member> | Promise<Nullable<Member>>;
 
   abstract getUserWithQueryBuilder(
@@ -72,6 +75,49 @@ export abstract class IQuery {
     | Promise<Nullable<Nullable<Post>[]>>;
 
   abstract findPoster(id: string): Nullable<Member> | Promise<Nullable<Member>>;
+
+  abstract product(): Nullable<Product>[] | Promise<Nullable<Product>[]>;
+}
+
+export abstract class IMutation {
+  abstract createCategory(
+    input: CreateCategoryInput,
+  ): Category | Promise<Category>;
+
+  abstract createUser(
+    input?: Nullable<CreateUserInput>,
+  ): Nullable<CreateUserRes> | Promise<Nullable<CreateUserRes>>;
+
+  abstract createPost(
+    input?: Nullable<CreatePostInput>,
+  ): Nullable<CreatePostRes> | Promise<Nullable<CreatePostRes>>;
+
+  abstract updatePost(
+    id: string,
+    input?: Nullable<UpdatePostInput>,
+  ): Nullable<UpdatePostRes> | Promise<Nullable<UpdatePostRes>>;
+
+  abstract deletePost(
+    input?: Nullable<DeletePostInput>,
+  ): Nullable<DeletePostRes> | Promise<Nullable<DeletePostRes>>;
+
+  abstract createProduct(
+    createProductInput: CreateProductInput,
+  ): Product | Promise<Product>;
+}
+
+export class MemberProfile {
+  id: string;
+  email?: Nullable<string>;
+  firstName?: Nullable<string>;
+  lastName?: Nullable<string>;
+}
+
+export class Member {
+  id: string;
+  displayName?: Nullable<string>;
+  memberType?: Nullable<MemberTypeEnum>;
+  profile?: Nullable<MemberProfile>;
 }
 
 export class PostWithoutAuthor {
@@ -92,25 +138,6 @@ export class CreateUserRes {
   memberId?: Nullable<string>;
 }
 
-export abstract class IMutation {
-  abstract createUser(
-    input?: Nullable<CreateUserInput>,
-  ): Nullable<CreateUserRes> | Promise<Nullable<CreateUserRes>>;
-
-  abstract createPost(
-    input?: Nullable<CreatePostInput>,
-  ): Nullable<CreatePostRes> | Promise<Nullable<CreatePostRes>>;
-
-  abstract updatePost(
-    id: string,
-    input?: Nullable<UpdatePostInput>,
-  ): Nullable<UpdatePostRes> | Promise<Nullable<UpdatePostRes>>;
-
-  abstract deletePost(
-    input?: Nullable<DeletePostInput>,
-  ): Nullable<DeletePostRes> | Promise<Nullable<DeletePostRes>>;
-}
-
 export class Post {
   id: string;
   title: string;
@@ -128,6 +155,12 @@ export class UpdatePostRes {
 
 export class DeletePostRes {
   postId: string;
+}
+
+export class Product {
+  id: string;
+  name?: Nullable<string>;
+  categories?: Nullable<Nullable<Category>[]>;
 }
 
 type Nullable<T> = T | null;
