@@ -111,13 +111,13 @@ export class MemberProfile {
   email?: Nullable<string>;
   firstName?: Nullable<string>;
   lastName?: Nullable<string>;
+  member?: Nullable<Member>;
 }
 
 export class Member {
   id: string;
   displayName?: Nullable<string>;
   memberType?: Nullable<MemberTypeEnum>;
-  profile?: Nullable<MemberProfile>;
 }
 
 export class PostWithoutAuthor {

@@ -44,15 +44,15 @@ export class MemberService {
   }
 
   async createUser(input: CreateUserInput) {
-    const newMember = new Member();
-    newMember.displayName = input.displayName;
-    newMember.memberType = input.memberType;
+    const existUser = await this.memberRepo.save(input);
 
-    const existProfile = await this.memberProfileRepo.save(input.profile);
+    const newMemberProfile = this.memberProfileRepo.create({
+      ...input.profile,
+      member: existUser,
+    });
 
-    newMember.profile = existProfile;
+    await this.memberProfileRepo.save(newMemberProfile);
 
-    const existUser = await this.memberRepo.save(newMember);
     return { memberId: existUser.id };
   }
 }

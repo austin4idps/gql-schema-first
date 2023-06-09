@@ -2,7 +2,6 @@ import { MemberTypeEnum } from 'src/graphql/graphql';
 import {
   Column,
   Entity,
-  JoinColumn,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -22,7 +21,6 @@ export class Member {
   memberType: MemberTypeEnum;
 
   @OneToOne(() => Profile)
-  @JoinColumn()
   profile: Profile;
 
   @OneToMany(() => Post, (post) => post.author)
