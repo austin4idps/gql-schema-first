@@ -14,6 +14,25 @@ export class MemberService {
   ) {}
 
   async getUser(id: string) {
+    const existMember = await this.memberRepo.findOne({
+      where: { id },
+      relations: ['profile'],
+    });
+
+    return existMember;
+  }
+
+  async getUserPosts(id: string) {
+    const existMember = await this.memberRepo.findOne({
+      where: { id },
+      relations: ['profile', 'posts', 'posts.author'],
+    });
+    console.log(existMember);
+
+    return existMember;
+  }
+
+  async getUserWithQueryBuilder(id: string) {
     const existMember = await this.memberRepo
       .createQueryBuilder('m')
       .where('m.id = :id', { id })

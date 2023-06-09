@@ -8,6 +8,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MemberModule } from './member/member.module';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { MemberModule } from './member/member.module';
       },
     }),
     MemberModule,
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -22,6 +22,28 @@ type Query {
   getUser(id: ID!): Member
 }
 
+type Query {
+  getUserWithQueryBuilder(id: ID!): Member
+}
+
+type PostWithoutAuthor {
+  id: ID!
+  title: String!
+  content: String!
+}
+
+type UserPostRes {
+  id: ID!
+  displayName: String
+  memberType: MemberTypeEnum
+  profile: MemberProfile
+  posts: [Post]
+}
+
+type Query {
+  getUserPosts(id: ID!): UserPostRes
+}
+
 input ProfileInput {
   email: String
   firstName: String

@@ -3,9 +3,11 @@ import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Post } from './post.entity';
 import { Profile } from './profile.entity';
 
 @Entity({ name: 'member' })
@@ -22,4 +24,7 @@ export class Member {
   @OneToOne(() => Profile)
   @JoinColumn()
   profile: Profile;
+
+  @OneToMany(() => Post, (post) => post.author)
+  posts: Post[];
 }
